@@ -71,7 +71,10 @@
     exec(successCallback, errorCallback, "PushPlugin", "unregister", []);
   };
 
-
+/*
+window.plugins.pushNotification.setApplicationIconBadgeNumber(success,error,badge) //badge is number
+window.plugins.pushNotification.incrementIconBadgeNumber(success,error,badge) //badge is number. can include + prefix to increment e.g. +1 to increaase by one
+*/
   // Call this to set the application icon badge
   PushNotification.prototype.setApplicationIconBadgeNumber = function(successCallback, errorCallback, badge) {
     errorCallback = errorCallback || function() {};
@@ -87,6 +90,22 @@
     }
 
     exec(successCallback, errorCallback, "PushPlugin", "setApplicationIconBadgeNumber", [{badge: badge}]);
+  };
+
+  PushNotification.prototype.incrementIconBadgeNumber = function(successCallback, errorCallback, badge) {
+    errorCallback = errorCallback || function() {};
+
+    if (typeof errorCallback != "function")  {
+      console.log("PushNotification.incrementIconBadgeNumber failure: failure parameter not a function");
+      return
+    }
+
+    if (typeof successCallback != "function") {
+      console.log("PushNotification.incrementIconBadgeNumber failure: success callback parameter must be a function");
+      return
+    }
+
+    exec(successCallback, errorCallback, "PushPlugin", "incrementIconBadgeNumber", [{badge: badge}]);
   };
 
   //-------------------------------------------------------------------

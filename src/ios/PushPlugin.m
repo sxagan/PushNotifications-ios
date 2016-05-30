@@ -67,6 +67,26 @@
     [self successWithMessage:[NSString stringWithFormat:@"app badge count set to %d", badge] callbackId:command.callbackId];
 }
 
+- (void)incrementIconBadgeNumber:(CDVInvokedUrlCommand *)command {
+
+    NSMutableDictionary* options = [command.arguments objectAtIndex:0];
+    int badge = 0;
+    // check if badge value include + prefix
+    if ([[options objectForKey:@"badge"] characterAtIndex:0] = @"+")
+    {
+       badge = [[[options objectForKey:@"badge"] substringFromIndex:1] intValue] ?: 0;
+       if (badge > 0)
+        badge += [UIApplication sharedApplication].applicationIconBadgeNumber;
+    }
+    else
+    {
+       badge = [[options objectForKey:@"badge"] intValue] ?: 0;
+    }
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:badge];
+
+    [self successWithMessage:[NSString stringWithFormat:@"app badge count set to %d", badge] callbackId:command.callbackId];
+}
+
 -(void)successWithMessage:(NSString *)message callbackId:(NSString*)callbackId {
     CDVPluginResult *commandResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:message];
     [self.commandDelegate sendPluginResult:commandResult callbackId:callbackId];

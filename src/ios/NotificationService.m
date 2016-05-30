@@ -171,6 +171,12 @@ static NotificationService *instance;
     [self sendNotificationToAllWebViews];
 }
 
+-(void) setBadge:(NSDictionary*)notification{
+    NSLog(@"receivedNotification=>setBadge -> %@", notification);
+
+    
+}
+
 
 -(void) didRegisterUserNotificationSettings:(UIUserNotificationSettings *)settings {
     if ([settings types] != UIUserNotificationTypeNone) {
