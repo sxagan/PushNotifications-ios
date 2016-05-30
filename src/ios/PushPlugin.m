@@ -72,7 +72,7 @@
     NSMutableDictionary* options = [command.arguments objectAtIndex:0];
     int badge = 0;
     // check if badge value include + prefix
-    if ([[options objectForKey:@"badge"] characterAtIndex:0] = @"+")
+    if ([[options objectForKey:@"badge"] characterAtIndex:0] == @"+")
     {
        badge = [[[options objectForKey:@"badge"] substringFromIndex:1] intValue] ?: 0;
        if (badge > 0)
