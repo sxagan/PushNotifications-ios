@@ -20,6 +20,10 @@
         <clobbers target="PushNotification" />
 	</js-module>
 
+	<js-module src="www/BackgroundJS.js" name="BackgroundJS">
+        <clobbers target="window.plugin.backgroundjs" />
+    </js-module>
+
 	<engines>
 		<engine name="cordova" version=">=3.0.0" />
 	</engines>
@@ -71,16 +75,24 @@
 			<feature name="PushPlugin">
 				<param name="ios-package" value="PushPlugin"/>
 			</feature>
+			<feature name="BackgroundJS">
+                <param name="ios-package" value="BackgroundJS"/>
+            </feature>
+
 		</config-file>
 
-    <header-file src="src/ios/AppDelegate+notification.h" />
+    	<header-file src="src/ios/AppDelegate+notification.h" />
 		<source-file src="src/ios/AppDelegate+notification.m" />
 
-    <header-file src="src/ios/NotificationService.h" />
-    <source-file src="src/ios/NotificationService.m" />
+    	<header-file src="src/ios/NotificationService.h" />
+    	<source-file src="src/ios/NotificationService.m" />
 
-    <header-file src="src/ios/PushPlugin.h" />
+    	<header-file src="src/ios/PushPlugin.h" />
 		<source-file src="src/ios/PushPlugin.m" />
+
+		<!-- Backgroundjs -->
+        <header-file src="src/ios/bgjs/BackgroundJS.h"/>
+        <source-file src="src/ios/bgjs/BackgroundJS.m"/>
 
 	</platform>
 
