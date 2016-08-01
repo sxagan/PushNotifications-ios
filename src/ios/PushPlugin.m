@@ -90,6 +90,15 @@
 - (void)registerPushEcho:(CDVInvokedUrlCommand *)command { 
     NSString* urlstr = [command.arguments objectAtIndex:0];
 
+    NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
+    NSString *currentLevelKey = @"pushEchoUrl";
+    [preferences setObject:urlstr forKey:currentLevelKey];
+    const BOOL didSave = [preferences synchronize];
+    if (!didSave)
+    {
+        NSLog(@"Cannot save to preference");
+    }
+
     if (urlstr != nil){
         NSURLRequest *theRequest=[NSURLRequest requestWithURL:[NSURL URLWithString:urlstr] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
         NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
