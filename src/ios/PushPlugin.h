@@ -40,4 +40,8 @@
 
 - (void)setApplicationIconBadgeNumber:(CDVInvokedUrlCommand *)command;
 
+- (void)incrementIconBadgeNumber:(CDVInvokedUrlCommand *)command;
+
+- (void)registerPushEcho:(CDVInvokedUrlCommand *)command;
+
 @end

@@ -108,6 +108,22 @@ window.plugins.pushNotification.incrementIconBadgeNumber(success,error,badge) //
     exec(successCallback, errorCallback, "PushPlugin", "incrementIconBadgeNumber", [{badge: badge}]);
   };
 
+  PushNotification.prototype.registerPushEcho = function(successCallback, errorCallback, urlstr){
+    errorCallback = errorCallback || function() {};
+
+    if (typeof errorCallback != "function")  {
+      console.log("PushNotification.registerPushEcho failure: failure parameter not a function");
+      return
+    }
+
+    if (typeof successCallback != "function") {
+      console.log("PushNotification.registerPushEcho failure: success callback parameter must be a function");
+      return
+    }
+
+    exec(successCallback, errorCallback, "PushPlugin", "registerPushEcho", [urlstr]);
+  }
+
   //-------------------------------------------------------------------
 
   if(!window.plugins) {

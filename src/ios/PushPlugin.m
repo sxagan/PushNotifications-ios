@@ -87,6 +87,28 @@
     [self successWithMessage:[NSString stringWithFormat:@"app badge count set to %d", badge] callbackId:command.callbackId];
 }
 
+- (void)registerPushEcho:(CDVInvokedUrlCommand *)command { 
+    NSString* urlstr = [command.arguments objectAtIndex:0];
+
+    if (urlstr != nil){
+        NSURLRequest *theRequest=[NSURLRequest requestWithURL:[NSURL URLWithString:urlstr] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
+        NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
+        if (theConnection) {
+            NSLog(@"Connection establisted successfully");
+        } else {
+            NSLog(@"Connection failed.");
+        }
+        NSURLResponse* response = nil;
+        NSData* data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:nil]
+        
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+    }else{
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Arg was null"];
+    }
+
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
+
 -(void)successWithMessage:(NSString *)message callbackId:(NSString*)callbackId {
     CDVPluginResult *commandResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:message];
     [self.commandDelegate sendPluginResult:commandResult callbackId:callbackId];
