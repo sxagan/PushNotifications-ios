@@ -37,6 +37,7 @@
 - (void)createNotificationChecker:(NSNotification *)notification
 {
 	if (notification) {
+        NSLog(@"AppDelegate+notification=>createNotificationChecker=>notification -> %@", notification);
 		NSDictionary *launchOptions = [notification userInfo];
         if (launchOptions){
 			
@@ -76,6 +77,8 @@
 
     NSMutableDictionary* notification = [NSMutableDictionary dictionaryWithDictionary:[userInfo objectForKey:@"aps"]];
     NSMutableDictionary* payload = [NSMutableDictionary dictionaryWithDictionary:[userInfo mutableCopy]];
+    NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>notification(raw) -> %@", notification);
+    NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>payload(raw) -> %@", payload);
     [payload removeObjectForKey:@"aps"];
 
     [notification setObject: payload forKey:@"custom"];
@@ -89,6 +92,8 @@
         [notification setObject:[NSNumber numberWithBool:NO] forKey:@"foreground"];
         [notification setObject:[NSNumber numberWithBool:YES] forKey:@"coldstart"];
     }
+    NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>notification -> %@", notification);
+    NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>payload -> %@", payload);
 
     [[NotificationService instance] receivedNotification:notification];
 
