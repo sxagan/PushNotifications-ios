@@ -111,6 +111,7 @@
         // use the remoteNotify dictionary for notification data
         NSLog(@"AppDelegate+notification=>didFinishLaunchingWithOptions=>remoteNotify -> %@", remoteNotify);
     }
+    return true;
 }
 
 
