@@ -99,6 +99,7 @@
         NSLog(@"Cannot save to preference");
     }
 
+    CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     if (urlstr != nil){
         NSURLRequest *theRequest=[NSURLRequest requestWithURL:[NSURL URLWithString:urlstr] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
         NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
@@ -112,9 +113,8 @@
 
         NSLog(@"PushPlugin=>registerPushEcho=>data -> %@", data);
         
-        CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     }else{
-        CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Arg was null"];
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Arg was null"];
     }
 
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
