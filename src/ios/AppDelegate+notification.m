@@ -102,6 +102,19 @@
     }
 }
 
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
+    
+    NSDictionary *remoteNotify = [launchOptions objectForKey: UIApplicationLaunchOptionsRemoteNotificationKey];
+    //Accept push notification when app is not open
+    if (remoteNotify)         // it is only true when you get the notification
+    {
+        // use the remoteNotify dictionary for notification data
+        NSLog(@"AppDelegate+notification=>didFinishLaunchingWithOptions=>remoteNotify -> %@", remoteNotify);
+    }
+}
+
+
+
 - (NSString*) getCurrentDate {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     NSLocale *enUSPOSIXLocale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
