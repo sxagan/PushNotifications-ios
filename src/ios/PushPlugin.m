@@ -108,11 +108,13 @@
             NSLog(@"Connection failed.");
         }
         NSURLResponse* response = nil;
-        NSData* data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:nil]
+        NSData* data = [NSURLConnection sendSynchronousRequest:theRequest returningResponse:&response error:nil];
+
+        NSLog(@"PushPlugin=>registerPushEcho=>data -> %@", data);
         
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+        CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     }else{
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Arg was null"];
+        CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Arg was null"];
     }
 
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
