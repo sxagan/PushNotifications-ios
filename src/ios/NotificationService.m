@@ -87,7 +87,7 @@ static NotificationService *instance;
     else{
         [self sendNotification:notification toCallback:backgroundMessageCallBack];
     }
-    NSLog(@"sendNotification() -> %@",object);
+    //NSLog(@"sendNotification() -> %@",object);
     [listOfNotificationsDelivered addObject:notification];
 }
 
