@@ -9,6 +9,8 @@
 #import "AppDelegate+notification.h"
 #import <objc/runtime.h>
 
+static char launchNotificationKey;
+
 @implementation AppDelegate (notification)
 
 // its dangerous to override a method from within a category.
@@ -73,15 +75,21 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
 
-    UIApplicationState appState = application.applicationState;
+    // Get application state for iOS4.x+ devices, otherwise assume active
+    UIApplicationState appState = UIApplicationStateActive;
+    if ([application respondsToSelector:@selector(applicationState)]) {
+        appState = application.applicationState;
+    }
+
+    NSMutableDictionary* notification = [NSMutableDictionary dictionaryWithDictionary:[userInfo mutableCopy]];
+
+    /*UIApplicationState appState = application.applicationState;
 
     NSMutableDictionary* notification = [NSMutableDictionary dictionaryWithDictionary:[userInfo objectForKey:@"aps"]];
     NSMutableDictionary* payload = [NSMutableDictionary dictionaryWithDictionary:[userInfo mutableCopy]];
-    //NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>notification(raw) -> %@", notification);
-    //NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>payload(raw) -> %@", payload);
     [payload removeObjectForKey:@"aps"];
 
-    [notification setObject: payload forKey:@"custom"];
+    [notification setObject: payload forKey:@"custom"];*/
     [notification setObject:[self getUUID] forKey:@"uuid"];
     [notification setObject:[self getCurrentDate] forKey:@"timestamp"];
 
@@ -92,8 +100,6 @@
         [notification setObject:[NSNumber numberWithBool:NO] forKey:@"foreground"];
         [notification setObject:[NSNumber numberWithBool:YES] forKey:@"coldstart"];
     }
-    //NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>notification -> %@", notification);
-    //NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>payload -> %@", payload);
 
     [[NotificationService instance] receivedNotification:notification];
 
@@ -102,7 +108,7 @@
     }
 }
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
+/*- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
     
     NSDictionary *remoteNotify = [launchOptions objectForKey: UIApplicationLaunchOptionsRemoteNotificationKey];
     //Accept push notification when app is not open
@@ -112,7 +118,7 @@
         NSLog(@"AppDelegate+notification=>didFinishLaunchingWithOptions=>remoteNotify -> %@", remoteNotify);
     }
     return true;
-}
+}*/
 
 
 
