@@ -82,6 +82,7 @@ static char launchNotificationKey;
     }
 
     NSMutableDictionary* notification = [NSMutableDictionary dictionaryWithDictionary:[userInfo mutableCopy]];
+    NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>notification -> %@", notification);
 
     /*UIApplicationState appState = application.applicationState;
 
