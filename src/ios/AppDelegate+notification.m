@@ -102,7 +102,7 @@
     }
 }
 
-/*- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
     
     NSDictionary *remoteNotify = [launchOptions objectForKey: UIApplicationLaunchOptionsRemoteNotificationKey];
     //Accept push notification when app is not open
@@ -112,7 +112,7 @@
         NSLog(@"AppDelegate+notification=>didFinishLaunchingWithOptions=>remoteNotify -> %@", remoteNotify);
     }
     return true;
-}*/
+}
 
 
 
