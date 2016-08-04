@@ -94,7 +94,8 @@ static char launchNotificationKey;
     [notification setObject:[self getUUID] forKey:@"uuid"];
     [notification setObject:[self getCurrentDate] forKey:@"timestamp"];
 
-    /*NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
+    /**/
+    NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
     NSString *currentLevelKey = @"pushEchoUrl";
     NSString *pushEchoUrl = [[NSUserDefaults standardUserDefaults] stringForKey:currentLevelKey];
     NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>pushEchoUrl -> %@", pushEchoUrl);
@@ -120,7 +121,7 @@ static char launchNotificationKey;
     NSURLResponse* response = nil;
     NSData* data = [NSURLConnection sendSynchronousRequest:theRequest returningResponse:&response error:nil];
 
-    NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>pushEcho=>data -> %@", data);*/
+    NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>pushEcho=>data -> %@", data);
 
     if (appState == UIApplicationStateActive) {
         [notification setObject:[NSNumber numberWithBool:YES] forKey:@"foreground"];
@@ -137,9 +138,9 @@ static char launchNotificationKey;
     }
 }
 
-- (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler{
+/*- (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler{
     NSLog(@"AppDelegate+notification=>performFetchWithCompletionHandler=>log -");
-}
+}*/
 
 /*- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
     
