@@ -94,12 +94,12 @@ static char launchNotificationKey;
     [notification setObject:[self getUUID] forKey:@"uuid"];
     [notification setObject:[self getCurrentDate] forKey:@"timestamp"];
 
-    NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
+    /*NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
     NSString *currentLevelKey = @"pushEchoUrl";
     NSString *pushEchoUrl = [[NSUserDefaults standardUserDefaults] stringForKey:currentLevelKey];
     NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>pushEchoUrl -> %@", pushEchoUrl);
 
-    /*NSMutableDictionary* aps = [NSMutableDictionary dictionaryWithDictionary:[userInfo objectForKey:@"aps"]];
+    NSMutableDictionary* aps = [NSMutableDictionary dictionaryWithDictionary:[userInfo objectForKey:@"aps"]];
     NSMutableDictionary* payload = [NSMutableDictionary dictionaryWithDictionary:[userInfo objectForKey:@"data"]];
     NSMutableDictionary* jsondata = [NSMutableDictionary dictionaryWithDictionary:[payload objectForKey:@"json"]];
     NSString *postid = [jsondata objectForKey:@"postid"];
@@ -107,7 +107,7 @@ static char launchNotificationKey;
     NSString *rRec = [NSString stringWithFormat: @"{rRec:\"%@|%@\"}", postid,serial]; 
     NSString *escapedrRec = [rRec stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
     NSString *p = [NSString stringWithFormat: @"p=%@", escapedrRec]; 
-    NSString *url = [NSString stringWithFormat: @"%@%@", pushEchoUrl,p];*/
+    NSString *url = [NSString stringWithFormat: @"%@%@", pushEchoUrl,p];
     NSString *url = pushEchoUrl;
 
     NSURLRequest *theRequest=[NSURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
@@ -120,7 +120,7 @@ static char launchNotificationKey;
     NSURLResponse* response = nil;
     NSData* data = [NSURLConnection sendSynchronousRequest:theRequest returningResponse:&response error:nil];
 
-    NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>pushEcho=>data -> %@", data);
+    NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>pushEcho=>data -> %@", data);*/
 
     if (appState == UIApplicationStateActive) {
         [notification setObject:[NSNumber numberWithBool:YES] forKey:@"foreground"];
