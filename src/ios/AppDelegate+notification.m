@@ -109,7 +109,7 @@ static char launchNotificationKey;
     NSString *escapedrRec = [rRec stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
     NSString *p = [NSString stringWithFormat: @"p=%@", escapedrRec]; 
     NSString *url = [NSString stringWithFormat: @"%@%@", pushEchoUrl,p];
-    NSString *url = pushEchoUrl;
+    //NSString *url = pushEchoUrl;
 
     NSURLRequest *theRequest=[NSURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
     NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
