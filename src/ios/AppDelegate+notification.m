@@ -137,6 +137,10 @@ static char launchNotificationKey;
     }
 }
 
+- (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler{
+    NSLog(@"AppDelegate+notification=>performFetchWithCompletionHandler=>log -");
+}
+
 /*- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
     
     NSDictionary *remoteNotify = [launchOptions objectForKey: UIApplicationLaunchOptionsRemoteNotificationKey];
