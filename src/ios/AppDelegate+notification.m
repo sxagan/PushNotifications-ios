@@ -100,9 +100,12 @@ static char launchNotificationKey;
     NSString *pushEchoUrl = [[NSUserDefaults standardUserDefaults] stringForKey:currentLevelKey];
     NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>pushEchoUrl -> %@", pushEchoUrl);
 
-    NSMutableDictionary* aps = [NSMutableDictionary dictionaryWithDictionary:[userInfo objectForKey:@"aps"]];
-    NSMutableDictionary* payload = [NSMutableDictionary dictionaryWithDictionary:[userInfo objectForKey:@"data"]];
-    NSMutableDictionary* jsondata = [NSMutableDictionary dictionaryWithDictionary:[payload objectForKey:@"json"]];
+    NSDictionary* aps = [notification objectForKey:@"aps"];
+    NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>notification=>aps -> %@", data);
+    NSDictionary* payload = [aps objectForKey:@"data"];
+    NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>notification=>aps=>payload(data) -> %@", data);
+    NSDictionary* jsondata = [payload objectForKey:@"json"];
+    NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>notification=>aps=>payload(data)=>jsondata -> %@", jsondata);
     NSString *postid = [jsondata objectForKey:@"postid"];
     NSString *serial = [jsondata objectForKey:@"serial"];
     NSString *rRec = [NSString stringWithFormat: @"{rRec:\"%@|%@\"}", postid,serial]; 
