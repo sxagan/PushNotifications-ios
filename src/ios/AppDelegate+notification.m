@@ -101,9 +101,9 @@ static char launchNotificationKey;
     NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>pushEchoUrl -> %@", pushEchoUrl);
 
     NSDictionary* aps = [notification objectForKey:@"aps"];
-    NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>notification=>aps -> %@", data);
+    NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>notification=>aps -> %@", aps);
     NSDictionary* payload = [aps objectForKey:@"data"];
-    NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>notification=>aps=>payload(data) -> %@", data);
+    NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>notification=>aps=>payload(data) -> %@", payload);
     NSDictionary* jsondata = [payload objectForKey:@"json"];
     NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>notification=>aps=>payload(data)=>jsondata -> %@", jsondata);
     NSString *postid = [jsondata objectForKey:@"postid"];
