@@ -96,38 +96,45 @@ static char launchNotificationKey;
     [notification setObject:[self getCurrentDate] forKey:@"timestamp"];
 
     /**/
-    NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
-    NSString *currentLevelKey = @"pushEchoUrl";
-    NSString *pushEchoUrl = [[NSUserDefaults standardUserDefaults] stringForKey:currentLevelKey];
-    NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>pushEchoUrl -> %@", pushEchoUrl);
-
     NSDictionary* aps = [userInfo objectForKey:@"aps"];
     NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>userInfo=>aps -> %@", aps);
-    NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>userInfo -> %@", userInfo);
-    NSDictionary* payload = [userInfo objectForKey:@"data"];
-    NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>userInfo=>payload(data) -> %@", payload);
-    NSDictionary* jsondata = [payload objectForKey:@"json"];
-    NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>userInfo=>payload(data)=>jsondata -> %@", jsondata);
-    NSString *postid = [jsondata objectForKey:@"postid"];
-    NSString *serial = [jsondata objectForKey:@"serial"];
-    NSString *rRec = [NSString stringWithFormat: @"{rRec:\"%@|%@\"}", postid,serial]; 
-    NSString *escapedrRec = [rRec stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
-    NSString *p = [NSString stringWithFormat: @"p=%@", escapedrRec]; 
-    NSString *url = [NSString stringWithFormat: @"%@%@", pushEchoUrl,p];
-    NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>pushEcho=>url -> %@", url);
-    //NSString *url = pushEchoUrl;
+    NSString alert = [aps objectForKey:@"alert"];
 
-    NSURLRequest *theRequest=[NSURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
-    NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
-    if (theConnection) {
-        NSLog(@"Connection establisted successfully");
-    } else {
-        NSLog(@"Connection failed.");
+    if(!alert.length){
+        NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>is an R2 ");
+    }else{
+        NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
+        NSString *currentLevelKey = @"pushEchoUrl";
+        NSString *pushEchoUrl = [[NSUserDefaults standardUserDefaults] stringForKey:currentLevelKey];
+        NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>pushEchoUrl -> %@", pushEchoUrl);
+
+        NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>userInfo -> %@", userInfo);
+        NSDictionary* payload = [userInfo objectForKey:@"data"];
+        NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>userInfo=>payload(data) -> %@", payload);
+        NSDictionary* jsondata = [payload objectForKey:@"json"];
+        NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>userInfo=>payload(data)=>jsondata -> %@", jsondata);
+        NSString *postid = [jsondata objectForKey:@"postid"];
+        NSString *serial = [jsondata objectForKey:@"serial"];
+        NSString *rRec = [NSString stringWithFormat: @"{rRec:\"%@|%@\"}", postid,serial]; 
+        NSString *escapedrRec = [rRec stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
+        NSString *p = [NSString stringWithFormat: @"p=%@", escapedrRec]; 
+        NSString *url = [NSString stringWithFormat: @"%@%@", pushEchoUrl,p];
+        NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>pushEcho=>url -> %@", url);
+        //NSString *url = pushEchoUrl;
+
+        NSURLRequest *theRequest=[NSURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
+        NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
+        if (theConnection) {
+            NSLog(@"Connection establisted successfully");
+        } else {
+            NSLog(@"Connection failed.");
+        }
+        NSURLResponse* response = nil;
+        NSData* data = [NSURLConnection sendSynchronousRequest:theRequest returningResponse:&response error:nil];
+
+        NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>pushEcho=>data -> %@", data);
+
     }
-    NSURLResponse* response = nil;
-    NSData* data = [NSURLConnection sendSynchronousRequest:theRequest returningResponse:&response error:nil];
-
-    NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>pushEcho=>data -> %@", data);
 
     if (appState == UIApplicationStateActive) {
         [notification setObject:[NSNumber numberWithBool:YES] forKey:@"foreground"];
