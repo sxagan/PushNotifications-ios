@@ -102,7 +102,7 @@ static char launchNotificationKey;
 
     NSDictionary* aps = [notification objectForKey:@"aps"];
     NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>notification=>aps -> %@", aps);
-    NSDictionary* payload = [aps objectForKey:@"data"];
+    NSDictionary* payload = [notification objectForKey:@"data"];
     NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>notification=>aps=>payload(data) -> %@", payload);
     NSDictionary* jsondata = [payload objectForKey:@"json"];
     NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>notification=>aps=>payload(data)=>jsondata -> %@", jsondata);
