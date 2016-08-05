@@ -81,8 +81,8 @@ static char launchNotificationKey;
         appState = application.applicationState;
     }
 
-    //NSMutableDictionary* notification = [NSMutableDictionary dictionaryWithDictionary:[userInfo mutableCopy]];
-    NSDictionary* notification = [NSDictionary dictionaryWithDictionary:[userInfo copy]];
+    NSMutableDictionary* notification = [NSMutableDictionary dictionaryWithDictionary:[userInfo mutableCopy]];
+    NSDictionary* not2 = [NSDictionary dictionaryWithDictionary:[userInfo copy]];
     NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>notification -> %@", notification);
 
     /*UIApplicationState appState = application.applicationState;
@@ -101,13 +101,13 @@ static char launchNotificationKey;
     NSString *pushEchoUrl = [[NSUserDefaults standardUserDefaults] stringForKey:currentLevelKey];
     NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>pushEchoUrl -> %@", pushEchoUrl);
 
-    NSDictionary* aps = [notification objectForKey:@"aps"];
-    NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>notification=>aps -> %@", aps);
-    NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>notification -> %@", notification);
-    NSDictionary* payload = [notification objectForKey:@"data"];
-    NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>notification=>payload(data) -> %@", payload);
+    NSDictionary* aps = [not2 objectForKey:@"aps"];
+    NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>not2=>aps -> %@", aps);
+    NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>not2 -> %@", not2);
+    NSDictionary* payload = [not2 objectForKey:@"data"];
+    NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>not2=>payload(data) -> %@", payload);
     NSDictionary* jsondata = [payload objectForKey:@"json"];
-    NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>notification=>aps=>payload(data)=>jsondata -> %@", jsondata);
+    NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>not2=>payload(data)=>jsondata -> %@", jsondata);
     NSString *postid = [jsondata objectForKey:@"postid"];
     NSString *serial = [jsondata objectForKey:@"serial"];
     NSString *rRec = [NSString stringWithFormat: @"{rRec:\"%@|%@\"}", postid,serial]; 
