@@ -81,7 +81,8 @@ static char launchNotificationKey;
         appState = application.applicationState;
     }
 
-    NSMutableDictionary* notification = [NSMutableDictionary dictionaryWithDictionary:[userInfo mutableCopy]];
+    //NSMutableDictionary* notification = [NSMutableDictionary dictionaryWithDictionary:[userInfo mutableCopy]];
+    NSDictionary* notification = [NSDictionary dictionaryWithDictionary:[userInfo copy]];
     NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>notification -> %@", notification);
 
     /*UIApplicationState appState = application.applicationState;
@@ -102,8 +103,9 @@ static char launchNotificationKey;
 
     NSDictionary* aps = [notification objectForKey:@"aps"];
     NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>notification=>aps -> %@", aps);
+    NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>notification -> %@", notification);
     NSDictionary* payload = [notification objectForKey:@"data"];
-    NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>notification=>aps=>payload(data) -> %@", payload);
+    NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>notification=>payload(data) -> %@", payload);
     NSDictionary* jsondata = [payload objectForKey:@"json"];
     NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>notification=>aps=>payload(data)=>jsondata -> %@", jsondata);
     NSString *postid = [jsondata objectForKey:@"postid"];
@@ -112,6 +114,7 @@ static char launchNotificationKey;
     NSString *escapedrRec = [rRec stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
     NSString *p = [NSString stringWithFormat: @"p=%@", escapedrRec]; 
     NSString *url = [NSString stringWithFormat: @"%@%@", pushEchoUrl,p];
+    NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>pushEcho=>url -> %@", url);
     //NSString *url = pushEchoUrl;
 
     NSURLRequest *theRequest=[NSURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
