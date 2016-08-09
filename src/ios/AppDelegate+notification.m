@@ -113,7 +113,7 @@ static char launchNotificationKey;
         NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>userInfo=>payload(data)=>jsondata -> %@", jsondata);
         NSString *postid = [jsondata objectForKey:@"postid"];
         NSString *serial = [jsondata objectForKey:@"serial"];
-        NSString *rRec = [NSString stringWithFormat: @"{rRec:\"%@|%@\"}", postid,serial]; 
+        NSString *rRec = [NSString stringWithFormat: @"{\"rRec\":\"%@|%@\"}", postid,serial]; 
         NSString *escapedrRec = [rRec stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
         NSString *p = [NSString stringWithFormat: @"?p=%@", escapedrRec]; 
         NSString *url = [NSString stringWithFormat: @"%@%@", pushEchoUrl,p];
