@@ -98,14 +98,12 @@ static char launchNotificationKey;
     /**/
     NSDictionary* aps = [userInfo objectForKey:@"aps"];
     NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>userInfo=>aps -> %@", aps);
-    NSString alert = [aps objectForKey:@"alert"];
+    NSString *alert = [aps objectForKey:@"alert"];
 
     if(!alert.length){
         NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>is an R2 ");
     }else{
-        NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
-        NSString *currentLevelKey = @"pushEchoUrl";
-        NSString *pushEchoUrl = [[NSUserDefaults standardUserDefaults] stringForKey:currentLevelKey];
+        NSString *pushEchoUrl = [[NSUserDefaults standardUserDefaults] stringForKey:@"pushEchoUrl"];
         NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>pushEchoUrl -> %@", pushEchoUrl);
 
         NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>userInfo -> %@", userInfo);
