@@ -83,7 +83,7 @@ static char launchNotificationKey;
 
     NSMutableDictionary* notification = [NSMutableDictionary dictionaryWithDictionary:[userInfo mutableCopy]];
     NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>notification -> %@", notification);
-    NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>notification -> %@", userInfo);
+    //NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>notification -> %@", userInfo);
 
     /*UIApplicationState appState = application.applicationState;
 
@@ -106,9 +106,9 @@ static char launchNotificationKey;
         NSString *pushEchoUrl = [[NSUserDefaults standardUserDefaults] stringForKey:@"pushEchoUrl"];
         NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>pushEchoUrl -> %@", pushEchoUrl);
 
-        NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>userInfo -> %@", userInfo);
+        //NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>userInfo -> %@", userInfo);
         NSDictionary* payload = [userInfo objectForKey:@"data"];
-        NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>userInfo=>payload(data) -> %@", payload);
+        //NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>userInfo=>payload(data) -> %@", payload);
         NSDictionary* jsondata = [payload objectForKey:@"json"];
         NSLog(@"AppDelegate+notification=>didReceiveRemoteNotification=>userInfo=>payload(data)=>jsondata -> %@", jsondata);
         NSString *postid = [jsondata objectForKey:@"postid"];
